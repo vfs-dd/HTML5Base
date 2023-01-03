@@ -2,29 +2,46 @@
 
 export default class App {
 
+    #dialogState;
+
     constructor() {
         // this is where we build an instance of this app
+        this.#dialogState = false;
 
         // handle a simple button press
         document.querySelector("#press-me")
-            .addEventListener("click", event => this.onToggleDialog( true, "Opened the dialog"));
+            .addEventListener("click", event =>
+                this.openDialog("Opened the dialog")
+            );
 
         document.querySelector("#close-me")
             .addEventListener("click", event => {
                 // when the user presses the button...
-                this.onToggleDialog( false, "Closed the dialog")
+                this.closeDialog("Closed the dialog")
             })
     }
 
-    onToggleDialog( open = false, msg = "done") {
 
-        if (open)
-            document.querySelector("#result-dlg").show();
+    openDialog( msg = "opened") {
 
-        if (!open)
-            document.querySelector("#result-dlg").close()
+        if (!this.#dialogState)
+            return;
 
+        this.#dialogState = !this.#dialogState;
+        document.querySelector("#result-dlg").show();
         console.log( msg )
     }
+
+
+    closeDialog( msg = "closed") {
+
+        if (this.#dialogState)
+            return;
+
+        this.#dialogState = !this.#dialogState;
+        document.querySelector("#result-dlg").close()
+        console.log( msg )
+    }
+
 
 }

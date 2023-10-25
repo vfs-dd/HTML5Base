@@ -24,7 +24,7 @@ export default class App {
 
     openDialog( msg = "opened") {
 
-        if (!this.#dialogState)
+        if (this.#dialogState)
             return;
 
         this.#dialogState = !this.#dialogState;
@@ -35,7 +35,7 @@ export default class App {
 
     closeDialog( msg = "closed") {
 
-        if (this.#dialogState)
+        if (!this.#dialogState)
             return;
 
         this.#dialogState = !this.#dialogState;
